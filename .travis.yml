@@ -1,0 +1,18 @@
+dist: bionic
+
+language: node_js
+
+node_js: 13.5.0
+
+install: npm ci
+
+addons:
+  sonarcloud:
+    organization: "najbartomasz-github"
+    token:
+      secure: "e1fa3b6b5d22f07cceb4cf4fe36122183879af25"
+
+script:
+    - npm run eslint
+    - npm run coveralls
+    - sonar-scanner
