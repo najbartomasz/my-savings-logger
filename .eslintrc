@@ -173,13 +173,6 @@
         "no-new-require": "error",
         "no-path-concat": "error",
         // STYLISTIC ISSUES
-        "array-bracket-newline": [
-            "error",
-            {
-                "minItems": 1,
-                "multiline": true
-            }
-        ],
         "array-bracket-spacing": [
             "error",
             "always",

@@ -1,18 +1,20 @@
 dist: bionic
 
+env:
+  global:
+    secure: kIs/Xz6umdWSggxpSyfRRVDHakQJ+NTPBhBH0GscRGiTcyX5EOxuUjpNnEnDUkF/oQnBI3U7XQpjS44WUJGvM36arVx9IqtetUCNWYpMhkBbFyY/vPz2Igg4XEQL+oWjbsXqw0Yat1s5GDtJ0g0v5Le36W4waezBftGXh9KzUlmT7AKu01knTCL3u5K31YtG8WZZsNjtPf7WGbctwOyPdkh5jAJuSVE78qDpHNFmr1TRNM9H/KfeRqSf2x6SceTM/uxq7Me6dCN/ZT3B2M7a//+nxPnVBV+gtBXQS5uNDPBpgX+DyTgWoE8sQcB02mOOyHi+xLT0MppS03Zn3fWuqDP7SD3pKmvGNc/mNY8b9jS6ajzYewUPv65UqOD+tS4Xcivc7wqSLctSoZrODo4Bs3MsDhoUxRnZQnC42uvNOiA464JGJ5EBnrCSbg9LoGvgRu2aw44y7h7u3ZtjSbiTRcokPotwP0HEYMT3oGM0S7Gy4oXFcaXkoWXdAXfwnqQz9jUI9O/hj0riiMgj7ywb9MTOloRq04EclssXIKy8jKmdmPYWnEaUHBDZQwHcUt2VTJCFfh7o2RCg7YeZ2pU0nJs8qo0x6k3/L1TunZPPdc39SsCXuVKA3igqe8+orChTO+A+ImDX7DOpSFHwb2zvdoxdJnyQs6TmSkjy1zHhmwc=
+
 language: node_js
 
-node_js: 13.5.0
+node_js: 13.11.0
 
 install: npm ci
 
 addons:
   sonarcloud:
-    organization: "najbartomasz-github"
-    token:
-      secure: "e1fa3b6b5d22f07cceb4cf4fe36122183879af25"
+    organization: najbartomasz-github
 
 script:
-    - npm run eslint
-    - npm run coveralls
-    - sonar-scanner
+- npm run eslint
+- npm run coveralls
+- sonar-scanner

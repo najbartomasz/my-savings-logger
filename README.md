@@ -6,3 +6,29 @@
 
 # my-savings-logger
 Common logger used by **my-savings** project components.
+
+## Usage
+
+Install **my-savings-logger** package:
+
+`npm install https://github.com/najbartomasz/my-savings-logger.git`
+
+Import the package in the project:
+
+* Node.js environment
+```javascript
+const { LoggerFactory } = require('my-savings-logger');
+
+const loggerFactory = new LoggerFactory();
+const logger = loggerFactory.create('Component');
+logger.info('Some message.');
+```
+
+* Browser environment
+```javascript
+import { LoggerFactory } from 'my-savings-logger';
+
+const loggerFactory = new LoggerFactory();
+const logger = loggerFactory.create('Component');
+logger.info('Some message.');
+```
