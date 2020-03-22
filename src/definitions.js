@@ -3,12 +3,15 @@
 
 const type = {
     name: 'string',
-    translateArguments: 'object'
+    translateArguments: 'object',
+    httpClientSend: 'function'
 };
 
 const error = {
     invalidComponentName: `Invalid type provided for component name. Expected ${type.name}, received {type}.`,
-    invalidTranslateArguments: `Invalid type provided for translate arguments. Expected ${type.translateArguments}, received {type}.`
+    invalidTranslateArguments: `Invalid type provided for translate arguments. Expected ${type.translateArguments}, received {type}.`,
+    missingHttpClientSend: 'Missing HttpClient\'s send method.',
+    invalidHttpClientSend: `HttpClient's send is not of type ${type.httpClientSend}.`
 };
 
 const format = {

@@ -4,15 +4,29 @@ jest.mock('../../src/translator');
 
 const { translator } = require('../../src/translator');
 
-const { TypeException } = require('../../src/exceptions');
+const { HttpClientException, TypeException } = require('../../src/exceptions');
 
 describe('exceptions', () => {
+    let expectedResult;
+    let expectedFormat;
+
+    beforeEach(() => {
+        expectedResult = { error: 'Error' };
+        global.Error = jest.fn().mockReturnValue(expectedResult);
+        expectedFormat = 'Format';
+    });
+
+    test('should have defined `http client` exception', () => {
+        // Given, When
+        const exception = new HttpClientException(expectedFormat);
+
+        // Then
+        expect(exception).toBe(expectedResult);
+    });
+
     test('should have defined `type` exception', () => {
         // Given
-        const expectedResult = { error: 'Error' };
-        global.Error = jest.fn().mockReturnValue(expectedResult);
         const actor = 'Actor';
-        const expectedFormat = 'Format';
 
         // When
         const exception = new TypeException(expectedFormat, actor);

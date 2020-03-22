@@ -19,7 +19,7 @@ Import the package in the project:
 ```javascript
 const { LoggerFactory } = require('my-savings-logger');
 
-const loggerFactory = new LoggerFactory();
+const loggerFactory = new LoggerFactory(httpClient); // HttpClient is optional. but if present must containg `send` method.
 const logger = loggerFactory.create('Component');
 logger.info('Some message.');
 ```
@@ -28,7 +28,7 @@ logger.info('Some message.');
 ```javascript
 import { LoggerFactory } from 'my-savings-logger';
 
-const loggerFactory = new LoggerFactory();
+const loggerFactory = new LoggerFactory(httpClient); // HttpClient is optional. but if present must containg `send` method.
 const logger = loggerFactory.create('Component');
 logger.info('Some message.');
 ```

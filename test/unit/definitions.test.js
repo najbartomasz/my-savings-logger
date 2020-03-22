@@ -24,6 +24,14 @@ describe('definitions', () => {
             // When, Then
             expect(definitions.type.translateArguments).toEqual(expectedType);
         });
+
+        test('should have defined accepted `http client\'s send method`', () => {
+            // Given
+            const expectedType = 'function';
+
+            // When, Then
+            expect(definitions.type.httpClientSend).toEqual(expectedType);
+        });
     });
 
     describe('error', () => {
@@ -48,6 +56,23 @@ describe('definitions', () => {
 
             // When, Then
             expect(definitions.error.invalidTranslateArguments).toEqual(expectedError);
+        });
+
+        test('should have defined `missing http client\'s send method` message', () => {
+            // Given
+            const expectedError = 'Missing HttpClient\'s send method.';
+
+            // When, Then
+            expect(definitions.error.missingHttpClientSend).toEqual(expectedError);
+        });
+
+        test('should have defined `invalid http client\'s send method` message', () => {
+            // Given
+            const expectedType = definitions.type.httpClientSend;
+            const expectedError = `HttpClient's send is not of type ${expectedType}.`;
+
+            // When, Then
+            expect(definitions.error.invalidHttpClientSend).toEqual(expectedError);
         });
     });
 

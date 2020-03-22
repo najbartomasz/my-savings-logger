@@ -5,8 +5,17 @@
 const { LoggerFactory } = require('../../src/logger-factory');
 
 describe('logger', () => {
-    test('should create multiple instances of Logger and write output to debug console', () => {
-        // Given
+    let component1;
+    let component2;
+    let component3;
+    let message1;
+    let message2;
+    let message3;
+    let expectedOutput1;
+    let expectedOutput2;
+    let expectedOutput3;
+
+    beforeEach(() => {
         console.info = jest.fn();
         console.warn = jest.fn();
         console.error = jest.fn();
@@ -20,15 +29,19 @@ describe('logger', () => {
             getSeconds: () => 0,
             getMilliseconds: () => milliseconds += 100
         });
-        const component1 = 'Component1';
-        const component2 = 'Component1';
-        const component3 = 'Component1';
-        const message1 = 'Initialized.';
-        const expectedOutput1 = `[20/08/1987 13:37:00.100] [${component1}] INFO: ${message1}`;
-        const message2 = 'Failed to initialize.';
-        const expectedOutput2 = `[20/08/1987 13:37:00.200] [${component2}] ERROR: ${message2}`;
-        const message3 = 'Up and running.';
-        const expectedOutput3 = `[20/08/1987 13:37:00.300] [${component3}] WARNING: ${message3}`;
+        component1 = 'Component1';
+        component2 = 'Component2';
+        component3 = 'Component3';
+        message1 = 'Initialized.';
+        message2 = 'Failed to initialize.';
+        message3 = 'Up and running.';
+        expectedOutput1 = `[20/08/1987 13:37:00.100] [${component1}] INFO: ${message1}`;
+        expectedOutput2 = `[20/08/1987 13:37:00.200] [${component2}] ERROR: ${message2}`;
+        expectedOutput3 = `[20/08/1987 13:37:00.300] [${component3}] WARNING: ${message3}`;
+    });
+
+    test('should create multiple instances of Logger and write output to debug console', () => {
+        // Given
         const loggerFactory = new LoggerFactory();
         const logger1 = loggerFactory.create(component1);
         const logger2 = loggerFactory.create(component2);
@@ -43,5 +56,27 @@ describe('logger', () => {
         expect(console.info).toHaveBeenCalledWith(expectedOutput1);
         expect(console.error).toHaveBeenCalledWith(expectedOutput2);
         expect(console.warn).toHaveBeenCalledWith(expectedOutput3);
+    });
+
+    test('should create multiple instances of Logger, write output to debug console and send it through http client', () => {
+        // Given
+        const httpClient = { send: jest.fn() };
+        const loggerFactory = new LoggerFactory(httpClient);
+        const logger1 = loggerFactory.create(component1);
+        const logger2 = loggerFactory.create(component2);
+        const logger3 = loggerFactory.create(component3);
+
+        // When
+        logger1.info(message1);
+        logger2.error(message2);
+        logger3.warning(message3);
+
+        // Then
+        expect(console.info).toHaveBeenCalledWith(expectedOutput1);
+        expect(httpClient.send).toHaveBeenCalledWith(expectedOutput1);
+        expect(console.error).toHaveBeenCalledWith(expectedOutput2);
+        expect(httpClient.send).toHaveBeenCalledWith(expectedOutput2);
+        expect(console.warn).toHaveBeenCalledWith(expectedOutput3);
+        expect(httpClient.send).toHaveBeenCalledWith(expectedOutput3);
     });
 });
